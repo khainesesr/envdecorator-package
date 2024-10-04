@@ -1,0 +1,6 @@
+setup.py
+envdecorator.egg-info/PKG-INFO
+envdecorator.egg-info/SOURCES.txt
+envdecorator.egg-info/dependency_links.txt
+envdecorator.egg-info/requires.txt
+envdecorator.egg-info/top_level.txt
