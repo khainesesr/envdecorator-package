@@ -1,3 +1,4 @@
+envdecorator.py
 setup.py
 envdecorator.egg-info/PKG-INFO
 envdecorator.egg-info/SOURCES.txt
