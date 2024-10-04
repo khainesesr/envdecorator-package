@@ -7,5 +7,5 @@ setup(
     description='A simple Python decorator to install env files',
     author='Kaitlin Haines',
     author_email='kaitlin.haines@esr.cri.nz',
-    install_requires=['dotenv','functools','python-dotenv'],
+    install_requires=['functools','python-dotenv'],
 )
