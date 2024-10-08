@@ -19,16 +19,12 @@ def load_env_from_dir(directories):
                 if os.path.exists(renviron_file_path):
                     load_dotenv(renviron_file_path)
                     print(f"Loaded environment variables from: {renviron_file_path}")
-                else:
-                    print(f"Warning: {renviron_file_path} does not exist. Skipping load.")
 
                 # Check for .env file
                 env_file_path = os.path.join(directory, ".env")
                 if os.path.exists(env_file_path):
                     load_dotenv(env_file_path)
                     print(f"Loaded environment variables from: {env_file_path}")
-                else:
-                    print(f"Warning: {env_file_path} does not exist. Skipping load.")
                 
             return func(*args, **kwargs)
 
