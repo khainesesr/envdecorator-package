@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 from functools import wraps
+import glob
 
 def load_env_from_dir(directories):
     """
@@ -21,7 +22,7 @@ def load_env_from_dir(directories):
                     print(f"Loaded environment variables from: {renviron_file_path}")
 
                 # Check for .env file
-                env_file_path = os.path.join(directory, ".env")
+                env_file_path = env_files = glob.glob(os.path.join(directory, "*env*"))
                 if os.path.exists(env_file_path):
                     load_dotenv(env_file_path)
                     print(f"Loaded environment variables from: {env_file_path}")
