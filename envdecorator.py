@@ -15,6 +15,10 @@ def load_env_from_dir(directories):
         def wrapper(*args, **kwargs):
             # Split directories and check for .Renviron and .env files
             dirs = directories.split(',')
+            filepath = os.path.dirname(os.path.abspath(__file__))
+            dirs = filepath if not dirs else dirs
+            if filepath != os.getcwd():
+                print('Script directory is differnt from working directory. Using script directory.)
             for directory in dirs:
                 renviron_file_path = os.path.join(directory, ".Renviron")
                 if os.path.exists(renviron_file_path):
