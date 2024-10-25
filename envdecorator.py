@@ -18,7 +18,7 @@ def load_env_from_dir(directories):
             filepath = os.path.dirname(os.path.abspath(__file__))
             dirs = filepath if not dirs else dirs
             if filepath != os.getcwd():
-                print('Script directory is differnt from working directory. Using script directory.)
+                print('Script directory is differnt from working directory. Using script directory.')
             for directory in dirs:
                 renviron_file_path = os.path.join(directory, ".Renviron")
                 if os.path.exists(renviron_file_path):
