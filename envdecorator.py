@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from functools import wraps
 import glob
-
+import warnings
 def load_env_from_dir(directories):
     """
     Decorator to load environment variables from .env and .Renviron files
@@ -10,38 +10,20 @@ def load_env_from_dir(directories):
 
     :param directories: Comma-separated directories where .env and .Renviron files are located.
     """
-    def decorator(func):
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            # Split directories and check for .Renviron and .env files
-            dirs = directories.split(',')
-            filepath = os.path.dirname(os.path.abspath(__file__))
-            dirs = filepath if not dirs else dirs
-            if filepath != os.getcwd():
-                print('Script directory is differnt from working directory. Using script directory.')
-            for directory in dirs:
-                renviron_file_path = os.path.join(directory, ".Renviron")
-                if os.path.exists(renviron_file_path):
-                    load_dotenv(renviron_file_path)
-                    print(f"Loaded environment variables from: {renviron_file_path}")
-
-                # Check for .env file
-                env_file_path = env_files = glob.glob(os.path.join(directory, "*env*"))
-                if os.path.exists(env_file_path):
-                    load_dotenv(env_file_path)
-                    print(f"Loaded environment variables from: {env_file_path}")
-                
-            return func(*args, **kwargs)
-
-        return wrapper
-    return decorator
-
-#curr = str(os.getcwd())
-#@load_env_from_dir(curr)
-#def main():
-#    # Access your environment variables
-#    my_var = os.getenv('sms_database')
-#    print(f'sms_database: {my_var}')
-
-#if __name__ == "__main__":
-#    main()
+    # Split directories and check for .Renviron and .env files
+    dirs = directories.split(',')
+    filepath = os.path.dirname(os.path.abspath(__file__))
+    dirs = filepath if not dirs else dirs
+    if filepath != os.getcwd():
+        warnings.warn('Script directory is differnt from working directory. Using script directory.')
+    for directory in dirs:
+        # Check for .Renviron
+        renviron_file_path = os.path.join(directory, ".Renviron")
+        if os.path.exists(renviron_file_path):
+            load_dotenv(renviron_file_path)
+            print(f"Loaded environment variables from: {renviron_file_path}")
+        # Check for anything with env in filename
+        env_file_path = env_files = glob.glob(os.path.join(directory, "*env*"))
+        if os.path.exists(env_file_path):
+            load_dotenv(env_file_path)
+            print(f"Loaded environment variables from: {env_file_path}")
